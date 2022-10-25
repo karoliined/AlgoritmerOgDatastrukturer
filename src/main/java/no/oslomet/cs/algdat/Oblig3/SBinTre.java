@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 
 public class SBinTre<T> {
+
     private static final class Node<T>   // en indre nodeklasse
     {
         private T verdi;                   // nodens verdi
@@ -24,6 +25,10 @@ public class SBinTre<T> {
         private Node(T verdi, Node<T> forelder)  // konstruktør
         {
             this(verdi, null, null, forelder);
+        }
+
+        public Node(T verdi) {
+            this.verdi = verdi;
         }
 
         @Override
