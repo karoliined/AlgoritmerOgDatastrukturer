@@ -3,9 +3,11 @@ package no.oslomet.cs.algdat.Oblig3;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.StringJoiner;
 
 public class SBinTre<T> {
+
     private static final class Node<T>   // en indre nodeklasse
     {
         private T verdi;                   // nodens verdi
@@ -23,6 +25,10 @@ public class SBinTre<T> {
         private Node(T verdi, Node<T> forelder)  // konstruktør
         {
             this(verdi, null, null, forelder);
+        }
+
+        public Node(T verdi) {
+            this.verdi = verdi;
         }
 
         @Override
@@ -82,8 +88,27 @@ public class SBinTre<T> {
         return antall == 0;
     }
 
-    public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+    public boolean leggInn(T verdi) {                                       //Oppgave 1
+        //Jeg har brukt programkode 5.2.3 a) fra kompendiet
+        Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+
+        Node<T> p = rot, q = null;                                          //p starter i roten
+        int cmp = 0;                                                        //hjelpevariabel
+
+        while (p != null){                                                  //Fortsetter til p er ute av treet
+            q = p;                                                          //q er forelder til p
+            cmp = comp.compare(verdi, p.verdi);                             //Bruker komparatoren
+            p = cmp < 0 ? p.venstre : p.høyre;                              //Flytter p
+        }
+        //p er nå null, dvs ute av treet, q er den siste vi passerte
+
+        p = new Node <>(verdi);                                             //Oppretter en ny node
+        if (q == null) rot = p;                                             //p blir rotnode
+        else if (cmp < 0) q.venstre = p;                                    //venstre barn til q
+        else q.høyre = p;                                                   //høyre barn til q
+
+        antall++;                                                           //én verdi mer i treet
+        return true;                                                        //Vellykket innlegging
     }
 
     public boolean fjern(T verdi) {
