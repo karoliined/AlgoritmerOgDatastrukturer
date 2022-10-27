@@ -24,12 +24,10 @@ public class SBinTre<T> {
             this(verdi, null, null, forelder);
         }
 
-
         @Override
         public String toString() {
             return "" + verdi;
         }
-
     } // class Node
 
     private Node<T> rot;                            // peker til rotnoden
@@ -134,19 +132,20 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        if(p.venstre != null) {
-            while (p != null) {
-                førstePostorden(p.venstre);
-            }
+        //Har brukt programkode 5.1.7 h)
+        while(true){
+            if (p.venstre != null)
+                p = p.venstre;
+            else if(p.høyre != null)
+                p = p.høyre;
+            return p;
         }
-        else{
-            førstePostorden(p.høyre);
-        }
-        return (Node<T>) p.forelder.verdi;
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+
+
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
