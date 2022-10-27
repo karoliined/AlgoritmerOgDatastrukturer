@@ -8,12 +8,21 @@ Oppgaven er levert av følgende student:
 # Oppgavebeskrivelse
 
 **Oppgave 1:**
+Metoden legger inn verdier i treet, med referanser til barn og forelder.
+Jeg brukte programkode 5.2.3 a) fra kompendiet, og skrev inn q så den nye noden får riktig forelder.
 
 **Oppgave 2:**
+Metoden returnerer antall forekomster av verdi, og 0 hvis verdi ikke finnes i treet.
+Jeg har brukt koden fra oppgave 2 i avsnitt 5.2.6 i komppendiet.
+Den bruker en while-løkke for å sammenligne verdiene i treet, og teller samtidig.
 
 **Oppgave 3:**
+FørstePostorden finner første node i postorden. Jeg brukte deler av  programkode 5.1.7 h), og endret så den returnerer noden og ikke verdien til noden.
+
+NestePostorden skal finne den neste noden i postorden. Det har jeg løst ved å lage en while-løkke som returnerer neste i postorden hvis noden er ulike steder i treet. For å finne neste node til et venstre barn med søsken så har jeg brukt en hjelpevariabel og en ny while-løkke.
 
 **Oppgave 4:**
+
 
 **Oppgave 5:**
 
