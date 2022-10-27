@@ -1,10 +1,7 @@
 package no.oslomet.cs.algdat.Oblig3;
 
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class SBinTre<T> {
 
@@ -27,15 +24,10 @@ public class SBinTre<T> {
             this(verdi, null, null, forelder);
         }
 
-        public Node(T verdi) {
-            this.verdi = verdi;
-        }
-
         @Override
         public String toString() {
             return "" + verdi;
         }
-
     } // class Node
 
     private Node<T> rot;                            // peker til rotnoden
@@ -102,7 +94,7 @@ public class SBinTre<T> {
         }
         //p er nå null, dvs ute av treet, q er den siste vi passerte
 
-        p = new Node <>(verdi);                                             //Oppretter en ny node
+        p = new Node <>(verdi, q);                                             //Oppretter en ny node
         if (q == null) rot = p;                                             //p blir rotnode
         else if (cmp < 0) q.venstre = p;                                    //venstre barn til q
         else q.høyre = p;                                                   //høyre barn til q
@@ -133,8 +125,6 @@ public class SBinTre<T> {
             }
         }
         return antallVerdi;
-
-
     }
 
     public void nullstill() {
@@ -142,11 +132,33 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Har brukt programkode 5.1.7 h)
+        while(true){
+            if (p.venstre != null)
+                p = p.venstre;
+            else if(p.høyre != null)
+                p = p.høyre;
+            else return p;
+        }
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        while (true) {
+            if (p.forelder == null)
+                return null;
+            else if (p == p.forelder.høyre)
+                return p.forelder;
+            else if (p.forelder.høyre == null)
+                return p.forelder;
+
+            else {
+                Node current = p.forelder.høyre;
+                while (current.venstre != null) {
+                    current = current.venstre;
+                }
+                return current;
+            }
+        }
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
