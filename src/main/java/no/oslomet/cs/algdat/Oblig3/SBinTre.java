@@ -80,27 +80,29 @@ public class SBinTre<T> {
         return antall == 0;
     }
 
-    public boolean leggInn(T verdi) {                                       //Oppgave 1
+    public boolean leggInn(T verdi) {
         //Jeg har brukt programkode 5.2.3 a) fra kompendiet
-        Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
-        Node<T> p = rot, q = null;                                          //p starter i roten
-        int cmp = 0;                                                        //hjelpevariabel
+        Node<T> p = rot, q = null;              //p starter i roten
+        int cmp = 0;                            //hjelpevariabel
 
-        while (p != null){                                                  //Fortsetter til p er ute av treet
-            q = p;                                                          //q er forelder til p
-            cmp = comp.compare(verdi, p.verdi);                             //Bruker komparatoren
-            p = cmp < 0 ? p.venstre : p.høyre;                              //Flytter p
+        while (p != null){                      //Fortsetter til p er ute av treet
+            q = p;                              //q er forelder til p
+            cmp = comp.compare(verdi, p.verdi);
+            p = cmp < 0 ? p.venstre : p.høyre;
         }
-        //p er nå null, dvs ute av treet, q er den siste vi passerte
+                                       //p er nå null, dvs ute av treet, q er den siste vi passerte
 
-        p = new Node <>(verdi, q);                                             //Oppretter en ny node
-        if (q == null) rot = p;                                             //p blir rotnode
-        else if (cmp < 0) q.venstre = p;                                    //venstre barn til q
-        else q.høyre = p;                                                   //høyre barn til q
+        p = new Node <>(verdi, q);     //Oppretter en ny node som tar inn verdi og forelder
+        if (q == null)
+            rot = p;                   //p er rotnode hvis forelder er null
+        else if (cmp < 0)
+            q.venstre = p;             //venstre barn til q
+        else
+            q.høyre = p;               //høyre barn til q
 
-        antall++;                                                           //én verdi mer i treet
-        return true;                                                        //Vellykket innlegging
+        antall++;                      //én verdi mer i treet
+        return true;
     }
 
     public boolean fjern(T verdi) {
@@ -144,19 +146,19 @@ public class SBinTre<T> {
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
         while (true) {
-            if (p.forelder == null)
+            if (p.forelder == null)             //Hvis p er rotnoden så er p den siste i postorden
                 return null;
-            else if (p == p.forelder.høyre)
+            else if (p == p.forelder.høyre)     //Hvis p er høyre barn, er forelderen neste i postorden
                 return p.forelder;
-            else if (p.forelder.høyre == null)
+            else if (p.forelder.høyre == null)  //Hvis p er venstre barn og enebarn, er forelderen neste
                 return p.forelder;
 
-            else {
-                Node current = p.forelder.høyre;
-                while (current.venstre != null) {
-                    current = current.venstre;
+            else {                                  //Hvis p er venstre barn, men ikke enebarn
+                Node denne = p.forelder.høyre;      //så er neste i postorden den bladnoden
+                while (denne.venstre != null) {     //som er lengst mot venstre av forelderens etterfølgere
+                    denne = denne.venstre;
                 }
-                return current;
+                return denne;
             }
         }
     }
@@ -189,6 +191,7 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
+        // Kode fra løsningen på oppgave 7 i kapittel 5.1.7 i kompendiet
         if (p.venstre != null)
             postordenRecursive(p.venstre, oppgave);
         if (p.høyre != null)
