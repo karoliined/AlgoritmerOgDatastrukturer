@@ -162,7 +162,41 @@ public class SBinTre<T> {
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //if (rot != null) postorden(rot, oppgave);
+
+        //Kode fra oppgave 1 fra 5.1.15 i kompendiet
+        if(tom())
+            return;
+
+        Node<T> p = rot;
+
+        while (true){
+            if (p.venstre != null)
+                p = p.venstre;
+            else if (p.høyre != null)
+                p = p.høyre;
+            else break;
+        }
+        oppgave.utførOppgave(p.verdi);
+
+        while (true){
+            if (p == rot)
+                break;
+            Node<T> f = p.forelder;
+            if (f.høyre == null || p == f.høyre)
+                p = f;
+            else{
+                p = f.høyre;
+                while (true){
+                    if (p.venstre != null)
+                        p = p.venstre;
+                    else if (p.høyre != null)
+                        p = p.høyre;
+                    else break;
+                }
+            }
+            oppgave.utførOppgave(p.verdi);
+        }
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) {
