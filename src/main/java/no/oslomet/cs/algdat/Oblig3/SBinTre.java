@@ -138,7 +138,7 @@ public class SBinTre<T> {
                 p = p.venstre;
             else if(p.høyre != null)
                 p = p.høyre;
-            return p;
+            else return p;
         }
     }
 
@@ -147,15 +147,17 @@ public class SBinTre<T> {
             if (p.forelder == null)
                 return null;
             else if (p == p.forelder.høyre)
-                p = p.forelder;
-            else if (p == p.forelder.venstre && p.forelder.høyre == null)
-                p = p.forelder;
-            else if (p == p.forelder.venstre && p.forelder.høyre != null){
-                p = p.forelder.høyre;
-                while (p.høyre != null)
-                    p = p.høyre;
+                return p.forelder;
+            else if (p.forelder.høyre == null)
+                return p.forelder;
+
+            else {
+                Node current = p.forelder.høyre;
+                while (current.venstre != null) {
+                    current = current.venstre;
+                }
+                return current;
             }
-            return p;
         }
     }
 
