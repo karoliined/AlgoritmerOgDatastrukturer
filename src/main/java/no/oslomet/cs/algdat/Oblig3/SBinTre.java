@@ -24,9 +24,6 @@ public class SBinTre<T> {
             this(verdi, null, null, forelder);
         }
 
-        public Node(T verdi) {
-            this.verdi = verdi;
-        }
 
         @Override
         public String toString() {
@@ -99,7 +96,7 @@ public class SBinTre<T> {
         }
         //p er nå null, dvs ute av treet, q er den siste vi passerte
 
-        p = new Node <>(verdi);                                             //Oppretter en ny node
+        p = new Node <>(verdi, q);                                             //Oppretter en ny node
         if (q == null) rot = p;                                             //p blir rotnode
         else if (cmp < 0) q.venstre = p;                                    //venstre barn til q
         else q.høyre = p;                                                   //høyre barn til q
