@@ -162,15 +162,10 @@ public class SBinTre<T> {
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-        //if (rot != null) postorden(rot, oppgave);
-
         //Kode fra oppgave 1 fra 5.1.15 i kompendiet
-        if(tom())
-            return;
-
         Node<T> p = rot;
 
-        while (true){
+        while (true){                   //flytter p til den første i postorden
             if (p.venstre != null)
                 p = p.venstre;
             else if (p.høyre != null)
@@ -180,21 +175,11 @@ public class SBinTre<T> {
         oppgave.utførOppgave(p.verdi);
 
         while (true){
-            if (p == rot)
+            if (p == rot)               //Den siste i postorden
                 break;
-            Node<T> f = p.forelder;
-            if (f.høyre == null || p == f.høyre)
-                p = f;
-            else{
-                p = f.høyre;
-                while (true){
-                    if (p.venstre != null)
-                        p = p.venstre;
-                    else if (p.høyre != null)
-                        p = p.høyre;
-                    else break;
-                }
-            }
+
+            p = nestePostorden(p);
+
             oppgave.utførOppgave(p.verdi);
         }
     }
@@ -204,7 +189,11 @@ public class SBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (p.venstre != null)
+            postordenRecursive(p.venstre, oppgave);
+        if (p.høyre != null)
+            postordenRecursive(p.høyre, oppgave);
+        oppgave.utførOppgave(p.verdi);
     }
 
     public ArrayList<T> serialize() {
