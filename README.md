@@ -35,3 +35,6 @@ Ikke løst
 
 **Warnings**
 Det er 7 warnings igjen, de refererer til elementer som ikke blir brukt siden jeg ikke har gjort alle oppgavene. Lar de stå siden jeg ikke skal endre på oppgavekoden.
+
+**Gradle**
+Jeg får ikke Gradle til å fungere
