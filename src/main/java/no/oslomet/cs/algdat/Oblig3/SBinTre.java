@@ -9,7 +9,7 @@ public class SBinTre<T> {
     {
         private T verdi;                   // nodens verdi
         private Node<T> venstre, høyre;    // venstre og høyre barn
-        private final Node<T> forelder;          // forelder
+        private Node<T> forelder;          // forelder
 
         // konstruktør
         private Node(T verdi, Node<T> v, Node<T> h, Node<T> forelder) {
@@ -117,22 +117,31 @@ public class SBinTre<T> {
             if (cmp < 0) {                               //går til venstre
                 q = p;
                 p = p.venstre;
-            } else if (cmp > 0) {                           //går til høyre
+            }
+            else if (cmp > 0) {                           //går til høyre
                 q = p;
                 p = p.høyre;
-            } else                                        //den søkte verdien ligger i p
+            }
+            else                                        //den søkte verdien ligger i p
                 break;
         }
         if (p == null)                                  //finner ikke verdi
             return false;
+
         if (p.venstre == null || p.høyre == null){                  //Tilfelle 1)p har ikke barn og 2) p har et høyre barn
             Node<T> b = p.venstre != null ? p.venstre : p.høyre;    //b for barn
-            if (p == rot)
+            if (p == rot) {
                 rot = b;
-            else if (p == q.venstre)
+                b.forelder = null;
+            }
+            else if (p == q.venstre) {
                 q.venstre = b;
-            else
+                b.forelder = q;
+            }
+            else {
                 q.høyre = b;
+                b.forelder = q;
+            }
         }
         else{                               //tilfelle 3) p har to barn
             Node<T> s = p, r = p.høyre;     //finner neste i inorden
