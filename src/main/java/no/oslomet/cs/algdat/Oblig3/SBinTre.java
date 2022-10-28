@@ -7,7 +7,7 @@ public class SBinTre<T> {
 
     private static final class Node<T>   // en indre nodeklasse
     {
-        private final T verdi;                   // nodens verdi
+        private T verdi;                   // nodens verdi
         private Node<T> venstre, høyre;    // venstre og høyre barn
         private final Node<T> forelder;          // forelder
 
@@ -106,7 +106,47 @@ public class SBinTre<T> {
     }
 
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Programkode 5.2.8 d) fra kompendiet
+        if (verdi == null)          //treet har ingen nullverdier
+            return false;
+
+        Node<T> p = rot, q = null;  //q skal være forelder til p
+
+        while (p != null) {                              //leter etter verdi
+            int cmp = comp.compare(verdi, p.verdi);     //sammenligner
+            if (cmp < 0) {                               //går til venstre
+                q = p;
+                p = p.venstre;
+            } else if (cmp > 0) {                           //går til høyre
+                q = p;
+                p = p.høyre;
+            } else                                        //den søkte verdien ligger i p
+                break;
+        }
+        if (p == null)                                  //finner ikke verdi
+            return false;
+        if (p.venstre == null || p.høyre == null){                  //Tilfelle 1)p har ikke barn og 2) p har et høyre barn
+            Node<T> b = p.venstre != null ? p.venstre : p.høyre;    //b for barn
+            if (p == rot)
+                rot = b;
+            else if (p == q.venstre)
+                q.venstre = b;
+            else
+                q.høyre = b;
+        }
+        else{                               //tilfelle 3) p har to barn
+            Node<T> s = p, r = p.høyre;     //finner neste i inorden
+            while (r.venstre != null){
+                s = r;                      //s er forelder til r
+                r = r.venstre;
+            }
+            p.verdi = r.verdi;              //kopierer verdien i r til p
+
+            if (s != p) s.venstre = r.høyre;
+            else s.høyre = r.høyre;
+        }
+        antall--;                           //det er nå en node mindre i treet
+        return true;
     }
 
     public int fjernAlle(T verdi) {
