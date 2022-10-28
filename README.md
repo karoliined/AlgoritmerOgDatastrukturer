@@ -31,7 +31,7 @@ Mentoden postordenRecursive bruker et rekursivt kall for å traversere treet i p
 Ikke løst
 
 **Oppgave 6:**
-Ikke løst
+Har begynt ved å legge inn programkode 5.2.8 d) og endret så foreldrepekeren flyttes til den slettede nodens forelder. Men rekker ikke å bli ferdig.
 
 **Warnings**
 Det er 7 warnings igjen, de refererer til elementer som ikke blir brukt siden jeg ikke har gjort alle oppgavene. Lar de stå siden jeg ikke skal endre på oppgavekoden.
