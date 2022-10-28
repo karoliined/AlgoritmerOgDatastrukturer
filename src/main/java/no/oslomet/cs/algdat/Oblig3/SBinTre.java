@@ -7,9 +7,9 @@ public class SBinTre<T> {
 
     private static final class Node<T>   // en indre nodeklasse
     {
-        private T verdi;                   // nodens verdi
+        private final T verdi;                   // nodens verdi
         private Node<T> venstre, høyre;    // venstre og høyre barn
-        private Node<T> forelder;          // forelder
+        private final Node<T> forelder;          // forelder
 
         // konstruktør
         private Node(T verdi, Node<T> v, Node<T> h, Node<T> forelder) {
@@ -145,7 +145,6 @@ public class SBinTre<T> {
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
-        while (true) {
             if (p.forelder == null)             //Hvis p er rotnoden så er p den siste i postorden
                 return null;
             else if (p == p.forelder.høyre)     //Hvis p er høyre barn, er forelderen neste i postorden
@@ -154,13 +153,12 @@ public class SBinTre<T> {
                 return p.forelder;
 
             else {                                  //Hvis p er venstre barn, men ikke enebarn
-                Node denne = p.forelder.høyre;      //så er neste i postorden den bladnoden
+                Node<T> denne = p.forelder.høyre;      //så er neste i postorden den bladnoden
                 while (denne.venstre != null) {     //som er lengst mot venstre av forelderens etterfølgere
                     denne = denne.venstre;
                 }
                 return denne;
             }
-        }
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
@@ -176,12 +174,10 @@ public class SBinTre<T> {
         }
         oppgave.utførOppgave(p.verdi);
 
-        while (true){
-            if (p == rot)               //Den siste i postorden
-                break;
+        while (p != rot) {
+            p = nestePostorden(p);      //finner alle nodene i postorden ved hjelp av metoren nestePostorden
 
-            p = nestePostorden(p);
-
+            assert p != null;
             oppgave.utførOppgave(p.verdi);
         }
     }
