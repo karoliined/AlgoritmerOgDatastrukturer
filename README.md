@@ -25,16 +25,6 @@ NestePostorden skal finne den neste noden i postorden. Det har jeg løst ved å 
 Jeg har brukt deler av koden fra oppgave 1 fra avsnitt 5.1.15 i kompendiet, og endret litt så det passer oppgaveteksten.
 Metoden postorden finner først den første noden i postorden ved hjelp av en while-løkke. Deretter finner den alle de resterende nodene i postorden ved hjelp av nestePostorden-metoden. Verdiene brukes til å utføre oppgaven.
 
-Mentoden postordenRecursive bruker et rekursivt kall for å traversere treet i postorden rekkefølge. Her har jeg brukt kode fra oppgave 7 i avsnitt 5.1.7 i kompendiet. 
+Metoden postordenRecursive bruker et rekursivt kall for å traversere treet i postorden rekkefølge. Her har jeg brukt kode fra oppgave 7 i avsnitt 5.1.7 i kompendiet. 
 
-**Oppgave 5:**
-Ikke løst
 
-**Oppgave 6:**
-Har begynt ved å legge inn programkode 5.2.8 d) og endret så foreldrepekeren flyttes til den slettede nodens forelder. Men rekker ikke å bli ferdig.
-
-**Warnings**
-Det er 7 warnings igjen, de refererer til elementer som ikke blir brukt siden jeg ikke har gjort alle oppgavene. Lar de stå siden jeg ikke skal endre på oppgavekoden.
-
-**Gradle**
-Jeg får ikke Gradle til å fungere
