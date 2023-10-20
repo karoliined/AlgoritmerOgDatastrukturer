@@ -178,10 +178,6 @@ public class SBinTre<T> {
         return antallVerdi;
     }
 
-    public void nullstill() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
-
     private static <T> Node<T> førstePostorden(Node<T> p) {
         //Har brukt programkode 5.1.7 h)
         while(true){
@@ -244,13 +240,6 @@ public class SBinTre<T> {
         oppgave.utførOppgave(p.verdi);
     }
 
-    public ArrayList<T> serialize() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
-
-    static <K> SBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
 
 
 } // ObligSBinTre
